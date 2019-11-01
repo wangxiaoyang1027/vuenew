@@ -26,6 +26,16 @@
             seen: ture
           }
         })
+        var app4 = new Vue({
+          el: '#app-4',
+          data: {
+            todos: [
+              { text: '学习 JavaScript' },
+              { text: '学习 Vue' },
+              { text: '整个牛项目' }
+            ]
+          }
+        })
         alert('元素已经加载完毕 , 测试 !')
       }
     </script>
@@ -40,6 +50,13 @@
     </div>
     <div id="app-3">
       <p v-if="seen">现在你看到我了</p>
+    </div>
+    <div id="app-4">
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
     </div>
   </body>
 </html>
