@@ -12,6 +12,10 @@
           el: '#app',
           data: {
             message: 'Hello Vue!'
+          },
+          created: function() {
+            // `this` 指向 vm 实例
+            console.log('a is: ' + this.message)
           }
         })
         var app2 = new Vue({
@@ -23,7 +27,7 @@
         var app3 = new Vue({
           el: '#app-3',
           data: {
-            seen: ture
+            seen: true
           }
         })
         var app4 = new Vue({
@@ -36,6 +40,46 @@
             ]
           }
         })
+        var app5 = new Vue({
+          el: '#app-5',
+          data: {
+            message: 'Hello vue-5'
+          },
+          methods: {
+            reverseMessage: function() {
+              this.message = this.message
+                .split('')
+                .reverse()
+                .join('')
+            }
+          }
+        })
+        var app6 = new Vue({
+          el: '#app-6',
+          data: {
+            message: ''
+          }
+        })
+        // Vue.component('todo-item', {
+        //   props: ['todo'],
+        //   template: '<li>{{ todo.text }}</li>'
+        // })
+
+        Vue.component('todo-item', {
+          // todo-item 组件现在接受一个
+          // "prop"，类似于一个自定义特性。
+          // 这个 prop 名为 todo。
+          props: ['todo'],
+          template: '<li>{{ todo.text }}</li>'
+        })
+
+        var app7 = new Vue({
+          el: '#app-7',
+          data: {
+            myList: [{ id: 0, text: 'kk1' }, { id: 1, text: 'kk2' }]
+          }
+        })
+
         alert('元素已经加载完毕 , 测试 !')
       }
     </script>
@@ -51,11 +95,26 @@
     <div id="app-3">
       <p v-if="seen">现在你看到我了</p>
     </div>
-    <div id="app-4">
+    <ul id="app-4">
+      <li v-for="(todo,index) in todos">{{ todo.text }} --- {{ index }}</li>
+    </ul>
+    <div id="app-5">
+      <p>{{ message }}</p>
+      <button v-on:click="reverseMessage">反转</button>
+    </div>
+    <div id="app-6">
+      <p>{{ message }}</p>
+      <input v-model="message" />
+    </div>
+
+    <div id="app-7">
       <ol>
-        <li v-for="todo in todos">
-          {{ todo.text }}
-        </li>
+        <todo-item
+          v-for="item in myList"
+          v-bind:todo="item"
+          v-bind:key="item.id"
+        >
+        </todo-item>
       </ol>
     </div>
   </body>
