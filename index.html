@@ -3,10 +3,53 @@
     <title>Hello World</title>
   </head>
   <body>
-    <script src="./jscript/vue.js"></script>
+      <script src="./jscript/vue.js"></script>
+
+      <h1>VUE TEST !!!</h1>
+      <div id='app-9'>{{ message }}</div>
+      <div id="app">
+        {{ message }}
+      </div>
+      <div id="app-2">
+        <span v-bind:title="message ">
+          鼠标悬停几秒钟查看此处动态绑定的提示信息！
+        </span>
+      </div>
+      <div id="app-3">
+        <p v-if="seen">现在你看到我了</p>
+      </div>
+      <ul id="app-4">
+        <li v-for="(todo,index) in todos">{{ todo.text }} --- {{ index }}</li>
+      </ul>
+      <div id="app-5">
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage">反转</button>
+      </div>
+      <div id="app-6">
+        <p>{{ message }}</p>
+        <input v-model="message" />
+      </div>
+  
+      <div id="app-7">
+        <ol>
+          <todo-item
+            v-for="item in myList"
+            v-bind:todo="item"
+            v-bind:key="item.id"
+          >
+          </todo-item>
+
+        </ol>
+      </div>
+      <div id="app-8">{{ text }}</div>
+      <div id='app-10'>
+        <div>现在计数：{{count}}</div>
+        <button id ='plus' @click='add'>+</button>
+        <button id='min' onclick="if (app10.count >0 ) app10.count -=1 ">-</button>
+      </div>
+      
     <script>
-      window.onload = function() {
-        // }
+let appplus 
 
         var app18 = new Vue({
           el: '#app',
@@ -81,53 +124,40 @@
         })
 
         var data1 = { text: 'app8' }
-        var app8 = new Vue({
+        const app8 = new Vue({
           el: '#app-8',
           props: ['todo'],
           data: data1
         })
+
+        const app9 = new Vue ({
+          el:'#app-9',
+          data:{
+              message:'HELLO , WNAGXIOAYANG'
+          }
+
+      })
+
+      const app10 = new Vue({
+          el:'#app-10',
+          data:{
+            count:0
+          },
+          methods:{
+            add:function(){
+              this.count++
+            }
+          }
+      })
 
         alert('元素已经加载完毕 , 测试 !')
         app8.text = 'app8 new!!!'
         console.log(data1.text)
         data1.text = 'This is a text !!! '
         console.log(app8.text)
-      }
+      //}
+     
     </script>
-    <h1>VUE TEST !!!</h1>
-    <div id="app">
-      {{ message }}
-    </div>
-    <div id="app-2">
-      <span v-bind:title="message ">
-        鼠标悬停几秒钟查看此处动态绑定的提示信息！
-      </span>
-    </div>
-    <div id="app-3">
-      <p v-if="seen">现在你看到我了</p>
-    </div>
-    <ul id="app-4">
-      <li v-for="(todo,index) in todos">{{ todo.text }} --- {{ index }}</li>
-    </ul>
-    <div id="app-5">
-      <p>{{ message }}</p>
-      <button v-on:click="reverseMessage">反转</button>
-    </div>
-    <div id="app-6">
-      <p>{{ message }}</p>
-      <input v-model="message" />
-    </div>
-
-    <div id="app-7">
-      <ol>
-        <todo-item
-          v-for="item in myList"
-          v-bind:todo="item"
-          v-bind:key="item.id"
-        >
-        </todo-item>
-      </ol>
-    </div>
-    <div id="app-8">{{ text }}</div>
+   
   </body>
 </html>
