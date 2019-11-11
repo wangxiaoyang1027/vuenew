@@ -3,161 +3,157 @@
     <title>Hello World</title>
   </head>
   <body>
-      <script src="./jscript/vue.js"></script>
+    <script src="./jscript/vue.js"></script>
 
-      <h1>VUE TEST !!!</h1>
-      <div id='app-9'>{{ message }}</div>
-      <div id="app">
-        {{ message }}
-      </div>
-      <div id="app-2">
-        <span v-bind:title="message ">
-          鼠标悬停几秒钟查看此处动态绑定的提示信息！
-        </span>
-      </div>
-      <div id="app-3">
-        <p v-if="seen">现在你看到我了</p>
-      </div>
-      <ul id="app-4">
-        <li v-for="(todo,index) in todos">{{ todo.text }} --- {{ index }}</li>
-      </ul>
-      <div id="app-5">
-        <p>{{ message }}</p>
-        <button v-on:click="reverseMessage">反转</button>
-      </div>
-      <div id="app-6">
-        <p>{{ message }}</p>
-        <input v-model="message" />
-      </div>
-  
-      <div id="app-7">
-        <ol>
-          <todo-item
-            v-for="item in myList"
-            v-bind:todo="item"
-            v-bind:key="item.id"
-          >
-          </todo-item>
+    <h1>VUE TEST !!!</h1>
+    <div id="app-9">{{ message }}</div>
+    <div id="app">
+      {{ message }}
+    </div>
+    <div id="app-2">
+      <span v-bind:title="message ">
+        鼠标悬停几秒钟查看此处动态绑定的提示信息！
+      </span>
+    </div>
+    <div id="app-3">
+      <p v-if="seen">现在你看到我了</p>
+    </div>
+    <ul id="app-4">
+      <li v-for="(todo,index) in todos">{{ todo.text }} --- {{ index }}</li>
+    </ul>
+    <div id="app-5">
+      <p>{{ message }}</p>
+      <button v-on:click="reverseMessage">反转</button>
+    </div>
+    <div id="app-6">
+      <p>{{ message }}</p>
+      <input v-model="message" />
+    </div>
 
-        </ol>
-      </div>
-      <div id="app-8">{{ text }}</div>
-      <div id='app-10'>
-        <div>现在计数：{{count}}</div>
-        <button id ='plus' @click='add'>+</button>
-        <button id='min' onclick="if (app10.count >0 ) app10.count -=1 ">-</button>
-      </div>
-      
+    <div id="app-7">
+      <ol>
+        <todo-item
+          v-for="item in myList"
+          v-bind:todo="item"
+          v-bind:key="item.id"
+        >
+        </todo-item>
+      </ol>
+    </div>
+    <div id="app-8">{{ text }}</div>
+    <div id="app-10">
+      <div>现在计数：{{ count }}</div>
+      <button id="plus" @click="add">+</button>
+      <button id="min" onclick="if (app10.count >0 ) app10.count -=1 ">
+        -
+      </button>
+    </div>
+
     <script>
-let appplus 
+      var app18 = new Vue({
+        el: '#app',
+        data: {
+          message: 'Hello Vue!'
+        },
+        created: function() {
+          // `this` 指向 vm 实例
+          console.log('a is: ' + this.message)
+        }
+      })
+      var app2 = new Vue({
+        el: '#app-2',
+        data: {
+          message: '页面加载于 ' + new Date().toLocaleString()
+        }
+      })
+      var app3 = new Vue({
+        el: '#app-3',
+        data: {
+          seen: true
+        }
+      })
+      var app4 = new Vue({
+        el: '#app-4',
+        data: {
+          todos: [
+            { text: '学习 JavaScript' },
+            { text: '学习 Vue' },
+            { text: '整个牛项目' }
+          ]
+        }
+      })
+      var app5 = new Vue({
+        el: '#app-5',
+        data: {
+          message: 'Hello vue-5'
+        },
+        methods: {
+          reverseMessage: function() {
+            this.message = this.message
+              .split('')
+              .reverse()
+              .join('')
+          }
+        }
+      })
+      var app6 = new Vue({
+        el: '#app-6',
+        data: {
+          message: ''
+        }
+      })
 
-        var app18 = new Vue({
-          el: '#app',
-          data: {
-            message: 'Hello Vue!'
-          },
-          created: function() {
-            // `this` 指向 vm 实例
-            console.log('a is: ' + this.message)
-          }
-        })
-        var app2 = new Vue({
-          el: '#app-2',
-          data: {
-            message: '页面加载于 ' + new Date().toLocaleString()
-          }
-        })
-        var app3 = new Vue({
-          el: '#app-3',
-          data: {
-            seen: true
-          }
-        })
-        var app4 = new Vue({
-          el: '#app-4',
-          data: {
-            todos: [
-              { text: '学习 JavaScript' },
-              { text: '学习 Vue' },
-              { text: '整个牛项目' }
-            ]
-          }
-        })
-        var app5 = new Vue({
-          el: '#app-5',
-          data: {
-            message: 'Hello vue-5'
-          },
-          methods: {
-            reverseMessage: function() {
-              this.message = this.message
-                .split('')
-                .reverse()
-                .join('')
-            }
-          }
-        })
-        var app6 = new Vue({
-          el: '#app-6',
-          data: {
-            message: ''
-          }
-        })
+      Vue.component('todo-item', {
+        // todo-item 组件现在接受一个
+        // "prop"，类似于一个自定义特性。
+        // 这个 prop 名为 todo。
+        props: ['todo'],
+        template: '<li>{{ todo.text }}</li>'
+      })
 
-        Vue.component('todo-item', {
-          // todo-item 组件现在接受一个
-          // "prop"，类似于一个自定义特性。
-          // 这个 prop 名为 todo。
-          props: ['todo'],
-          template: '<li>{{ todo.text }}</li>'
-        })
+      var app7 = new Vue({
+        el: '#app-7',
+        data: {
+          myList: [
+            { id: 0, text: 'kk1' },
+            { id: 1, text: 'kk2' },
+            { id: 2, text: 'kk3' }
+          ]
+        }
+      })
 
-        var app7 = new Vue({
-          el: '#app-7',
-          data: {
-            myList: [
-              { id: 0, text: 'kk1' },
-              { id: 1, text: 'kk2' },
-              { id: 2, text: 'kk3' }
-            ]
-          }
-        })
+      var data1 = { text: 'app8' }
+      const app8 = new Vue({
+        el: '#app-8',
+        props: ['todo'],
+        data: data1
+      })
 
-        var data1 = { text: 'app8' }
-        const app8 = new Vue({
-          el: '#app-8',
-          props: ['todo'],
-          data: data1
-        })
-
-        const app9 = new Vue ({
-          el:'#app-9',
-          data:{
-              message:'HELLO , WNAGXIOAYANG'
-          }
-
+      const app9 = new Vue({
+        el: '#app-9',
+        data: {
+          message: 'HELLO , WNAGXIOAYANG'
+        }
       })
 
       const app10 = new Vue({
-          el:'#app-10',
-          data:{
-            count:0
-          },
-          methods:{
-            add:function(){
-              this.count++
-            }
+        el: '#app-10',
+        data: {
+          count: 0
+        },
+        methods: {
+          add: function() {
+            this.count++
           }
+        }
       })
 
-        alert('元素已经加载完毕 , 测试 !')
-        app8.text = 'app8 new!!!'
-        console.log(data1.text)
-        data1.text = 'This is a text !!! '
-        console.log(app8.text)
+      alert('元素已经加载完毕 , 测试 !')
+      app8.text = 'app8 new!!!'
+      console.log(data1.text)
+      data1.text = 'This is a text !!! '
+      console.log(app8.text)
       //}
-     
     </script>
-   
   </body>
 </html>
