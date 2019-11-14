@@ -69,7 +69,10 @@
       <h3 v-cloak  v-text='url'></h3>
     </div>
 
-
+<div id='app-13'>
+  <img :src='imgurl' alt=''/>
+  <a :href='aurl'>百度</a>
+</div>
 
 
     <script>
@@ -184,7 +187,17 @@ let app12 = new Vue({
   data:{
     message:'wangxy',
     url:'<a href="#" >pointer</a>'
-    // url:'ws'
+    
+  }
+})
+
+let app13 = new Vue({
+
+  el:'#app-13',
+  data:{
+    imgurl:'https://pic2.zhimg.com/v2-915f23721ada7da07452e6ea55199021_r.jpg',
+    aurl:'https://www.baidu.com/'
+    
   }
 })
 
