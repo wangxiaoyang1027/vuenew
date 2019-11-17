@@ -11,6 +11,12 @@
   display:none
 }
 
+.cred{
+  color:red
+}
+.cyellow{
+  color:green
+}
 </style>
 
     <h1>VUE TEST !!!</h1>
@@ -69,9 +75,25 @@
       <h3 v-cloak  v-text='url'></h3>
     </div>
 
-<div id='app-13'>
+    <div id='app-14'>
+      <ul>
+        <li v-for='(item,index) in books'><a href='#' :class={cred:item.flag} @click=onclick(index)>{{item.name}}</a></li>
+      </ul>
+    </div>
+
+    <div id='app-15'>
+      <h2>
+        {{fullname}}
+
+      </h2>
+      <h2>总价：{{price}}</h2>
+    </div>
+
+<div id='app-13' >
   <img :src='imgurl' alt=''/>
-  <a :href='aurl'>百度</a>
+  <a :href='aurl' :class='getClass()'>百度</a>
+  <button v-on:click='btnclick'>dianji </button>
+  <div :class='getarray()'>例子</div>
 </div>
 
 
@@ -185,10 +207,12 @@
 let app12 = new Vue({
   el:'#app-12',
   data:{
-    message:'wangxy',
+    message:'wangxy-cloak',
     url:'<a href="#" >pointer</a>'
     
   }
+  
+
 })
 
 let app13 = new Vue({
@@ -196,10 +220,79 @@ let app13 = new Vue({
   el:'#app-13',
   data:{
     imgurl:'https://pic2.zhimg.com/v2-915f23721ada7da07452e6ea55199021_r.jpg',
-    aurl:'https://www.baidu.com/'
+    aurl:'https://www.baidu.com/',
+    mcolor:'cyellow',
+    isred:true,
+    isyellow:false,
+    kk:'fd',
+    ll:'wnag'
     
+    
+  },
+  methods:{
+    btnclick:function(){
+      this.isred =!this.isred
+    },
+    getClass:function(){
+      return {cred:this.isred,cyellow:this.isyellow}
+    },
+    getarray:function(){    
+      return [this.kk, this.ll]
+    }
   }
 })
+
+let app14 = new Vue({
+  el:'#app-14',
+  data:{
+    books:[
+      {name:'book1',flag:false},{name:'book2', flag:true},{name:'book3',flag:false}]
+  },
+  methods:{
+    onclick:function(index){
+      // alert(index)
+      for (let tmpi = 0 ;tmpi < this.books.length; tmpi ++){
+        this.books[tmpi].flag = false;
+        
+      }
+      this.books[index].flag = true;
+    }
+  }
+})
+
+app15 = new Vue({
+  el:'#app-15',
+  data:{
+    firstname:'wang',
+    lastname: 'xiaoyang',
+    books:[
+      { id:100, name:'Name1',price:10},{id:101,name:'Name2',price:200}
+
+    ]
+  },
+  computed:{
+    fullname:function(){
+      return this.firstname + ' ' + this.lastname
+     },
+    price:function(){
+
+      let allprice = 0 
+      // foreach ( k in this.books){
+      //   allprice += k.price;
+      // }
+
+
+      // foreach (k in this.books){
+      //     allprice += k.price
+      // }
+      for (let i = 0 ; i< this.books.length; i++)
+      {
+        allprice += this.books[i].price;
+      }
+      return allprice;
+    }
+   }
+  })
 
       alert('元素已经加载完毕 , 测试 !')
       app8.text = 'app8 new!!!'
