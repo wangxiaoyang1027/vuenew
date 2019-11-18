@@ -77,7 +77,7 @@
 
     <div id='app-14'>
       <ul>
-        <li v-for='(item,index) in books'><a href='#' :class={cred:item.flag} @click=onclick(index)>{{item.name}}</a></li>
+        <li v-for='(item,index) in books'><a href='#' :class={cred:item.flag} @click=onclick(index,$event)>{{item.name}}</a></li>
       </ul>
     </div>
 
@@ -94,6 +94,11 @@
   <a :href='aurl' :class='getClass()'>百度</a>
   <button v-on:click='btnclick'>dianji </button>
   <div :class='getarray()'>例子</div>
+</div>
+
+<div id='app-16' @click='divclick'>kkkkk
+  <button @click.stop='btnclick'>点击一下</button>  
+  <input tyep='text' @keyup.enter='txtclick'/>
 </div>
 
 
@@ -242,6 +247,7 @@ let app13 = new Vue({
   }
 })
 
+
 let app14 = new Vue({
   el:'#app-14',
   data:{
@@ -249,13 +255,14 @@ let app14 = new Vue({
       {name:'book1',flag:false},{name:'book2', flag:true},{name:'book3',flag:false}]
   },
   methods:{
-    onclick:function(index){
+    onclick:function(index,event){
       // alert(index)
       for (let tmpi = 0 ;tmpi < this.books.length; tmpi ++){
         this.books[tmpi].flag = false;
         
       }
       this.books[index].flag = true;
+      console.log(event)
     }
   }
 })
@@ -292,6 +299,21 @@ app15 = new Vue({
       return allprice;
     }
    }
+  })
+
+  let app16=new Vue({
+    el:'#app-16',
+    methods:{
+      divclick(){
+        console.log('divclick')
+      },
+      btnclick(){
+        console.log('btn click')
+      },
+      txtclick(){
+        console.log('txt click')
+      }
+    }
   })
 
       alert('元素已经加载完毕 , 测试 !')
