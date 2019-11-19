@@ -99,6 +99,27 @@
 <div id='app-16' @click='divclick'>kkkkk
   <button @click.stop='btnclick'>点击一下</button>  
   <input tyep='text' @keyup.enter='txtclick'/>
+  <div v-if='isshow'>
+    <div>aaa</div>
+    <div>bbb</div>
+    <div>ccc</div>
+  </div>
+  <div v-else>
+    <div>I'm false</div>
+  </div>
+  <div v-if="score>90">beat</div>
+  <div v-else-if="score>=60">good</div>
+  <div v-else>wrong</div>
+</div>
+  <div id="app-17">
+    <!-- <div>{{getTitle}}</div> -->
+    <div >{{nameflag}}</div>
+    <!-- <span v-if="isname">Please input name:</span>
+    <span v-else> Please input email:</span> -->
+    <input v-if='isname' type="text" placeholder="input name">
+    <input v-else type="text" placeholder="input email">
+    <button @click='onclick()'>选择登录方式</button>
+
 </div>
 
 
@@ -303,6 +324,10 @@ app15 = new Vue({
 
   let app16=new Vue({
     el:'#app-16',
+    data:{
+      isshow:true,
+      score:40
+    },
     methods:{
       divclick(){
         console.log('divclick')
@@ -316,6 +341,27 @@ app15 = new Vue({
     }
   })
 
+
+let app17 = new Vue({
+  el:'#app-17',
+  data:{
+    isname:true
+  },
+computed:{
+  nameflag:function(){
+    if (this.isname)
+      return 'Please input name:'
+    else
+      return 'Please input email:'
+   
+  }
+},
+  methods:{
+    onclick(){
+      this.isname = !this.isname;
+    }
+  }
+})
       alert('元素已经加载完毕 , 测试 !')
       app8.text = 'app8 new!!!'
       console.log(data1.text)
