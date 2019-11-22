@@ -96,6 +96,11 @@
   <div :class='getarray()'>例子</div>
 </div>
 
+
+
+
+
+
 <div id='app-16' @click='divclick'>kkkkk
   <button @click.stop='btnclick'>点击一下</button>  
   <input tyep='text' @keyup.enter='txtclick'/>
@@ -121,6 +126,32 @@
     <button @click='onclick()'>选择登录方式</button>
 
 </div>
+
+
+<div id='app-19'>
+<table>
+ <thead>
+    <td>书名</td>
+    <td>出版年月</td>
+    <td>单价</td>
+    <td>数量</td>
+    <td>操作</td>
+  </thead>
+  <tbody>
+    <tr v-for="(item , index) in books">
+        <td>{{item.name}}</td>
+        <td>{{item.date}}</td>
+        <td>{{item.price}}</td>   
+        <td><button @click='fun_decreated(index)' v-bind:disabled='books[index].num ===0'>-</button>{{item.num}}<button @click='fun_increated(index)' v-bind:disabled="books[index].num ==3">+</button></td> 
+        <td> <button   @click="fun_removeclick(index)" >删  除</button></td>
+    </tr>
+
+  </tbody>
+
+</table>
+
+</div>
+  
 
 
     <script>
@@ -273,7 +304,7 @@ let app14 = new Vue({
   el:'#app-14',
   data:{
     books:[
-      {name:'book1',flag:false},{name:'book2', flag:true},{name:'book3',flag:false}]
+      {name:'book1',flag:true},{name:'book2', flag:false},{name:'book3',flag:false}]
   },
   methods:{
     onclick:function(index,event){
@@ -362,7 +393,32 @@ computed:{
     }
   }
 })
-      alert('元素已经加载完毕 , 测试 !')
+
+let app19 = new Vue({
+  el:'#app-19',
+  data:{
+    books:[{name:'三体',date:'2019-11-10',price:12,num:1},
+            {name:'断舍离',date:'2019-01-10',price:20,num:1},
+            {name:'进击的智人',date:'2018-02-20',price:34,num:1}
+            ]
+  },
+  methods:{
+    fun_removeclick(index){
+      this.books.splice(index,1);
+    },
+    fun_decreated(index){
+      if( this.books[index].num>=1)
+      this.books[index].num --;
+    },
+    fun_increated(index){
+      this.books[index].num++;
+    }
+  }
+
+})
+
+alert('元素已经加载完毕 , 测试 !')
+    
       app8.text = 'app8 new!!!'
       console.log(data1.text)
       data1.text = 'This is a text !!! '
