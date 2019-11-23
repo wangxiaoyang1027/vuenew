@@ -90,7 +90,7 @@
     </div>
 
 <div id='app-13' >
-  <img :src='imgurl' alt=''/>
+  <!-- <img :src='imgurl' alt=''/> -->
   <a :href='aurl' :class='getClass()'>百度</a>
   <button v-on:click='btnclick'>dianji </button>
   <div :class='getarray()'>例子</div>
@@ -149,6 +149,8 @@
   </tbody>
 
 </table>
+<div  v-show="books.length == 0 ">This is Empty !</div>
+<div>总价：{{totalprice | totalfilter}}</div>
 
 </div>
   
@@ -330,7 +332,7 @@ app15 = new Vue({
     ]
   },
   computed:{
-    fullname:function(){
+    fullname(){
       return this.firstname + ' ' + this.lastname
      },
     price:function(){
@@ -379,7 +381,7 @@ let app17 = new Vue({
     isname:true
   },
 computed:{
-  nameflag:function(){
+  nameflag(){
     if (this.isname)
       return 'Please input name:'
     else
@@ -401,6 +403,22 @@ let app19 = new Vue({
             {name:'断舍离',date:'2019-01-10',price:20,num:1},
             {name:'进击的智人',date:'2018-02-20',price:34,num:1}
             ]
+  },
+  computed:{
+    totalprice(){
+        let sum = 0 
+        
+        for ( let i=0 ; i < this.books.length; i++){
+          sum += this.books[i].price*this.books[i].num
+
+        }
+        return sum;
+    }
+  },
+  filters:{
+    totalfilter(total ){
+        return total * 8.6
+    }
   },
   methods:{
     fun_removeclick(index){
