@@ -41,7 +41,8 @@
     </div>
     <div id="app-6">
       <p>{{ message }}</p>
-      <input v-model="message" />
+      <!-- <input v-model.lazy="message" /> -->
+      <input v-model.number ="message" />
     </div>
 
     <div id="app-7">
@@ -175,11 +176,14 @@
 
 <div id='app-23'>
 
-<input type='checkbox' value='足球' v-model='hobit'>足球
+<!-- <input type='checkbox' value='足球' v-model='hobit'>足球
 <input type='checkbox' value='篮球' v-model='hobit'>篮球
 <input type='checkbox' value='兵乓球' v-model='hobit'>乒乓球
-<input type='checkbox' value='拳击' v-model='hobit'>拳击
+<input type='checkbox' value='拳击' v-model='hobit'>拳击 -->
 
+<label v-for="item  in oriangehobbits" >
+  <input type='checkbox' :value='item' v-model='hobit' :id='item'>{{item}}
+</label>
 
 
 
@@ -506,7 +510,9 @@ let app22= new Vue({
 let app23 = new Vue({
 el:'#app-23',
 data:{
-  hobit:[]
+  hobit:[],
+  oriangehobbits:['拳击','篮球','台球','射击','基建','足球','排球','乒乓球']
+
 }
 })
 
