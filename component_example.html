@@ -10,8 +10,9 @@
         <div id='app-1'>
                 <div>{{message}}</div>
                     <my-cpn></my-cpn>
-    
-            </div>
+                <c2></c2>
+        </div>
+
 
 
         <script>
@@ -25,14 +26,47 @@
             </div>
             `
         })
+
+        // 创建父子组件
+        const cpn1 = Vue.extend({
+            template:`
+            <div>
+                <div>This is first component</div>
+            </div>
+            `
+        })
+
+
+        const cpn2 = Vue.extend({
+
+            template:`<div>
+                <h2>This is second </h2>
+                <c1></c1>
+                </div>
+                
+            `,
+            components:{
+                c1:cpn1
+            }
+        })
+
+
+
+
+
         // 注册组件
         Vue.component('my-cpn', cpnConstructor);
+
+        // Vue.component('c3',cpn1)
 
 
         let app1 = new Vue({
                 el:'#app-1',
                 data:{
                     message:'wang'
+                },
+                components:{
+                    c2:cpn2
                 }
             })
         
