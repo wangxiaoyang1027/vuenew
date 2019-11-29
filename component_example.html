@@ -10,11 +10,26 @@
         <div id='app-1'>
                 <div>{{message}}</div>
                     <my-cpn></my-cpn>
-                <c2></c2>
+                <c2 :mymovices='movices' ></c2>
+                <cpna></cpna>
         </div>
 
+        <!-- 组件模板的分离写法-->
+<!-- 第一种方式， script , 但 type 必须为 text/x-template -->
+<!-- <script type='text/x-template'  id='cpnK'>
+    <div>
+        <h2>分离模板</h2>
+    </div>
+</script> -->
 
 
+<!-- 第二种写法： 用 <template> 标签 -->
+    <template id=cpnk>
+            <div>
+                    <h2>分离模板--TEMPLATE</h2>
+                </div>
+
+    </template>
         <script>
             // 创建组件
         let cpnConstructor = Vue.extend({
@@ -28,23 +43,33 @@
         })
 
         // 创建父子组件
+
+        // 子组件
         const cpn1 = Vue.extend({
             template:`
             <div>
-                <div>This is first component</div>
+                <div>This is Child component</div>
             </div>
-            `
+            `,
+            data:{
+                mydata(){
+                    return {kk:['dd','as']}
+                }
+            }
         })
 
-
+        // 父组件
         const cpn2 = Vue.extend({
 
             template:`<div>
-                <h2>This is second </h2>
+                <h2>This is Parent component </h2>
                 <c1></c1>
+                <div v-for="item in mymovices" >{{item}}</div>
                 </div>
                 
             `,
+            props:['mymovices'],
+                
             components:{
                 c1:cpn1
             }
@@ -59,16 +84,30 @@
 
         // Vue.component('c3',cpn1)
 
+        // 模板的分离写法
+        Vue.component('cpna',{
+               template:'#cpnK'
+                
+            })
 
-        let app1 = new Vue({
+
+        const app1 = new Vue({
                 el:'#app-1',
                 data:{
-                    message:'wang'
+                    message:'wang',
+                    movices:['孩子王','阿凡达','U571','终结者']
                 },
                 components:{
                     c2:cpn2
+                   
                 }
+               
             })
+
+
+
+
+         
         
         </script>
        
