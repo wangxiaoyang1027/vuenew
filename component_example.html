@@ -7,10 +7,10 @@
         <script src="./jscript/vue.js"></script>
 
         <!-- 调用组件 -->
-        <div id='app-1'>
+        <div id='app-1'  >
                 <div>{{message}}</div>
                     <my-cpn></my-cpn>
-                <c2 :mymovices='movices' ></c2>
+                <c2 :mymovices='movices' v-on:myitemclick='pitemclick' ></c2>      <!-- v-on : 此处监听 myitemclick 事件， 并默认传递 ID 给方法 pitemcliick 。-->
                 <cpna></cpna>
         </div>
 
@@ -60,11 +60,13 @@
 
         // 父组件
         const cpn2 = Vue.extend({
-
             template:`<div>
                 <h2>This is second , wangxy</h2>
                 <c1></c1>
                 <div v-for="item in mymovices" >{{item}}</div>
+               
+                    <button v-for='(item,id) in books' @click='itemclick(id)'>{{item.name}}</button>
+               
                 </div>
                 
             `,
@@ -72,7 +74,22 @@
                 
             components:{
                 c1:cpn1
+            },
+            data(){
+                    return {books:[
+                        {id:1 , name:'book1'},
+                        {id:2,name:'book2'},
+                        {id:3,name:'book3'}
+                    ]}
+                },
+            methods:{
+                itemclick(id){
+                    alert(id);
+                    //  往父组件传递  id  , 触发事件
+                    this.$emit('myitemclick',id )            // myitemclick : 事件名字 ; id : 同时传递过去的参数
+                }
             }
+           
         })
 
 
@@ -91,6 +108,11 @@
             })
 
 
+
+
+
+
+
         const app1 = new Vue({
                 el:'#app-1',
                 data:{
@@ -100,6 +122,11 @@
                 components:{
                     c2:cpn2
                    
+                },
+                methods:{
+                    pitemclick(id){
+                        alert(id)
+                    }
                 }
                
             })
