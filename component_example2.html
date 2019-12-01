@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <title>Component Example</title>
+    </head>
+    <body>
+    
+        <script src="./jscript/vue.js"></script>
+
+        <div id='app-1'>
+                <!-- 将 开始数 传递给 父组件 -->
+                <cpn1 :startnum ='startnum' :nownum ='startnum' ></cpn1>
+                
+        </div>
+
+
+        <script>
+            // 父组件
+            const cpn1 = Vue.extend({
+                template:`<div>
+                    <div>The start value :{{startnum}}</div>
+                    <div>The value is :{{mynownum}} </div>       
+                            <!-- 将 开始数传递给 子组件 的 属性  myvalue 中 -->
+                            <cpn2 :myvalue ='startnum' v-on:fun_change='change'></cpn2>
+                    </div>`,
+                props:['startnum','nownum'],
+                data(){
+                    return {
+                        mynownum : this.nownum
+                    }
+                },
+                methods:{
+                    change(value){
+                            this.mynownum= value
+                        }
+                }
+            })
+
+
+            Vue.component('cpn1',cpn1)
+
+
+            // 子组件
+            const cpn2 = Vue.extend({
+                template:`
+                <div>
+                <button @click='fun_min'>-</button> 
+                <input type='text' style='width:40px' v-model='my_value'></input>
+                <button @click='fun_add'>+</button>
+                </div>` ,
+                props:[
+                    'myvalue'
+                ],
+                data(){
+                    return {
+                        my_value :this.myvalue
+                    }
+                },
+                methods:{
+                    fun_add:function(){
+                        this.my_value++;
+                        this.$emit('fun_change',this.my_value)
+                    },
+                    fun_min:function(){
+                        this.my_value--;
+                        this.$emit('fun_change',this.my_value)
+                    }
+                }
+            })
+
+            Vue.component('cpn2',cpn2)
+
+            const app = new Vue({
+                    el:'#app-1',
+                    data:{
+                        startnum:10
+                    },
+                    methods:{
+                        
+                    }
+                })
+        
+
+            
+        </script>
+
+    </body>
+      
+</html>
