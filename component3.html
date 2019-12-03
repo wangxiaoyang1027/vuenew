@@ -1,0 +1,49 @@
+<html>
+<head>
+    <title>Component Example2</title>
+</head>
+<body>
+    <script src="./jscript/vue.js"></script>
+
+    <div id='app-1'>
+        <div>{{message}}</div>
+        <button @click='doclick'>主按钮</button>
+        <cpn1></cpn1>
+    </div>
+
+
+
+    <script>
+   
+        const cpn1= Vue.extend({
+            template:`<div>
+                    <button>ClickMe</button>
+                    </div>`,
+                    methods:{
+                        dosth(){
+                            alert('dosth')
+                        }
+                    }
+        })
+
+        Vue.component('cpn1',cpn1)
+
+        const app= new Vue({
+            el:'#app-1',
+            data:{
+                message:'hello'
+            },
+            methods:{
+                doclick(){
+                    console.log(this.$children)
+                    this.$children[0].dosth();
+                }
+            }
+        })
+    
+    </script>
+
+</body>
+
+
+</html>

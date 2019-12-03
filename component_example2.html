@@ -18,11 +18,12 @@
             const cpn1 = Vue.extend({
                 template:`<div>
                     <div>The start value :{{startnum}}</div>
-                    <div>The value is :{{mynownum}} </div>       
+                    <div>The value is :{{mynownum}} </div>   
+                    <button @click='doclick'>click me</button>    
                             <!-- 将 开始数传递给 子组件 的 属性  myvalue 中 -->
                             <cpn2 :myvalue ='startnum' v-on:fun_change='change'></cpn2>
                     </div>`,
-                props:['startnum','nownum'],
+                props:['startnum','nownum','wprop'],
                 data(){
                     return {
                         mynownum : this.nownum
@@ -31,7 +32,18 @@
                 methods:{
                     change(value){
                             this.mynownum= value
+                        },
+                        doclick(){
+                            alert(this.nownum)
+                            wprop= this.nownum;
+                            console.log(wprop)
                         }
+
+                },
+                watch:{
+                    nownum(newvalue){
+                            alert('change')
+                    }
                 }
             })
 
